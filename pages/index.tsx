@@ -1,9 +1,17 @@
+import { gql } from '@apollo/client';
 import Head from 'next/head'
 import Image from 'next/image'
 
-import styles from '../styles/Home.module.css'
+import client from '../lib/apolloClient';
+import styles from '../styles/Home.module.css';
 
-const Home = () => (
+type PageProps = {
+  data: {
+    message: string;
+  }
+}
+
+const Home = ({ data }: PageProps) => (
   <div className={styles.container}>
     <Head>
       <title>Create Next App</title>
@@ -15,6 +23,10 @@ const Home = () => (
       <h1 className={styles.title}>
         Welcome to <a href="https://nextjs.org">Next.js!</a>
       </h1>
+
+      <div>
+        graphql = {data.message}
+      </div>
 
       <p className={styles.description}>
         Get started by editing{' '}
@@ -68,5 +80,21 @@ const Home = () => (
     </footer>
   </div>
 );
+
+export const getServerSideProps = async () => {
+  const { data } = await client.query({
+    query: gql`
+      query {
+        message
+      }
+    `,
+  });
+
+  return {
+    props: {
+      data,
+    },
+  };
+}
 
 export default Home;

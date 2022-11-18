@@ -4,14 +4,14 @@ import { startServerAndCreateNextHandler } from '@as-integrations/next'
 // The GraphQL schema
 const typeDefs = `#graphql
   type Query {
-    hello: String
+    message: String
   }
 `;
 
 // A map of functions which return data for the schema.
 const resolvers = {
   Query: {
-    hello: () => 'world',
+    message: () => 'hello world',
   },
 };
 

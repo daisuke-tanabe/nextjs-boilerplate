@@ -1,4 +1,4 @@
-export const resolvers = {
+const resolvers = {
   Query: {
     user: () => ({
       id: '1',
@@ -20,3 +20,5 @@ export const resolvers = {
     ]
   }
 };
+
+export default resolvers;

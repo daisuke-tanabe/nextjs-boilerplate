@@ -3,7 +3,7 @@ import {SchemaLink} from '@apollo/client/link/schema'
 import merge from 'deepmerge';
 import {useMemo} from 'react';
 
-import {schema} from './schema';
+import schema from './schema';
 
 let client: any;
 
@@ -28,11 +28,10 @@ export const initializeApollo = (initialState = null) => {
   // gets hydrated here
   if (initialState) {
     // Get existing cache, loaded during client side data fetching
-    const existingCache = apolloClient.extract()
+    const existingCache = apolloClient.extract();
 
     // Merge the existing cache into data passed from getStaticProps/getServerSideProps
-    const overwriteMerge = (destinationArray: any[], sourceArray: any[]) => sourceArray;
-    const data = merge(initialState, existingCache, { arrayMerge: overwriteMerge })
+    const data = merge(initialState, existingCache)
 
     // Restore the cache with the merged data
     apolloClient.cache.restore(data)

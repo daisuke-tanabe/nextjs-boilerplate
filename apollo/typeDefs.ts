@@ -1,18 +1,20 @@
 import { gql } from '@apollo/client'
 
-export const typeDefs = gql`
+const typeDefs = gql`
   type User {
-    id: String
-    name: String
+    id: String!
+    name: String!
   }
 
   type Book {
-    id: String
-    title: String
+    id: String!
+    title: String!
   }
 
   type Query {
-    user: User
-    books: [Book]
+    user: User!
+    books: [Book!]!
   }
 `;
+
+export default typeDefs;

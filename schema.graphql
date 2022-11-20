@@ -1,25 +1,32 @@
+type Query {
+  user: User!
+  book(id: ID!): Book
+  books(limit: Int): [Book!]!
+}
+
 type User {
-  id: String
-  name: String
+  id: String!
+  name: String!
+  role: String!
 }
 
 type Book {
-  id: String
-  title: String
+  id: String!
+  title: String!
+  creators: [Creator!]
+  image: BookImage!
+  stock: Int!
+  users: [User!]
 }
 
-type Query {
-  user: User
-  books: [Book]
+type BookImage {
+  small: String!
+  medium: String!
+  large: String!
 }
 
-query Query {
-  user {
-    id
-    name
-  }
-  books {
-    id
-    title
-  }
+type Creator {
+  id: String!
+  name: String!
+  role: String
 }

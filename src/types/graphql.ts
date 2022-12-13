@@ -33,24 +33,26 @@ export type User = {
   name: Scalars['String'];
 };
 
-export type QueryQueryVariables = Exact<{ [key: string]: never; }>;
+export type QueryQueryVariables = Exact<{ [key: string]: never }>;
 
-
-export type QueryQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, name: string }, books: Array<{ __typename?: 'Book', id: string, title: string }> };
-
+export type QueryQuery = {
+  __typename?: 'Query';
+  user: { __typename?: 'User'; id: string; name: string };
+  books: Array<{ __typename?: 'Book'; id: string; title: string }>;
+};
 
 export const QueryDocument = gql`
-    query Query {
-  user {
-    id
-    name
+  query Query {
+    user {
+      id
+      name
+    }
+    books {
+      id
+      title
+    }
   }
-  books {
-    id
-    title
-  }
-}
-    `;
+`;
 
 /**
  * __useQueryQuery__
@@ -68,13 +70,13 @@ export const QueryDocument = gql`
  * });
  */
 export function useQueryQuery(baseOptions?: Apollo.QueryHookOptions<QueryQuery, QueryQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<QueryQuery, QueryQueryVariables>(QueryDocument, options);
-      }
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<QueryQuery, QueryQueryVariables>(QueryDocument, options);
+}
 export function useQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<QueryQuery, QueryQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<QueryQuery, QueryQueryVariables>(QueryDocument, options);
-        }
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<QueryQuery, QueryQueryVariables>(QueryDocument, options);
+}
 export type QueryQueryHookResult = ReturnType<typeof useQueryQuery>;
 export type QueryLazyQueryHookResult = ReturnType<typeof useQueryLazyQuery>;
 export type QueryQueryResult = Apollo.QueryResult<QueryQuery, QueryQueryVariables>;

@@ -1,7 +1,7 @@
-import {ApolloClient, HttpLink, InMemoryCache} from '@apollo/client'
-import {SchemaLink} from '@apollo/client/link/schema'
+import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
+import { SchemaLink } from '@apollo/client/link/schema';
 import merge from 'deepmerge';
-import {useMemo} from 'react';
+import { useMemo } from 'react';
 
 import schema from './schema';
 
@@ -12,17 +12,18 @@ const createIsomorphicLink = () => {
   return new HttpLink({
     uri: 'http://localhost:3000/api/graphql',
     credentials: 'same-origin',
-  })
-}
+  });
+};
 
-const createApolloClient = () => new ApolloClient({
-  ssrMode: typeof window === 'undefined',
-  link: createIsomorphicLink(),
-  cache: new InMemoryCache(),
-});
+const createApolloClient = () =>
+  new ApolloClient({
+    ssrMode: typeof window === 'undefined',
+    link: createIsomorphicLink(),
+    cache: new InMemoryCache(),
+  });
 
 export const initializeApollo = (initialState = null) => {
-  const apolloClient = client ?? createApolloClient()
+  const apolloClient = client ?? createApolloClient();
 
   // If your page has Next.js data fetching methods that use Apollo Client, the initial state
   // gets hydrated here
@@ -31,17 +32,17 @@ export const initializeApollo = (initialState = null) => {
     const existingCache = apolloClient.extract();
 
     // Merge the existing cache into data passed from getStaticProps/getServerSideProps
-    const data = merge(initialState, existingCache)
+    const data = merge(initialState, existingCache);
 
     // Restore the cache with the merged data
-    apolloClient.cache.restore(data)
+    apolloClient.cache.restore(data);
   }
   // For SSG and SSR always create a new Apollo Client
-  if (typeof window === 'undefined') return apolloClient
+  if (typeof window === 'undefined') return apolloClient;
   // Create the Apollo Client once in the client
-  if (!client) client = apolloClient
+  if (!client) client = apolloClient;
 
-  return apolloClient
-}
+  return apolloClient;
+};
 
 export const useApollo = (initialState: any) => useMemo(() => initializeApollo(initialState), [initialState]);

@@ -4,7 +4,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import type { AppProps } from 'next/app';
 
-import { useApollo } from '../apollo/client'
+import { useApollo } from '../apollo/client';
 import createEmotionCache from '../lib/createEmotionCache';
 import theme from '../lib/theme';
 
@@ -23,7 +23,7 @@ const MyApp = ({ Component, emotionCache = clientSideEmotionCache, pageProps }: 
       <CacheProvider value={emotionCache}>
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline/>
+          <CssBaseline />
           <Component {...pageProps} />
         </ThemeProvider>
       </CacheProvider>

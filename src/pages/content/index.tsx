@@ -2,7 +2,7 @@ import NextHead from 'next/head';
 import NextLink from 'next/link';
 import { ReactElement } from 'react';
 
-import { MainLayout } from '../../components/Layout'
+import { MainLayout } from '../../components/Layout';
 
 const Content = () => {
   return (

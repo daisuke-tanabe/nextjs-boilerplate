@@ -1,5 +1,5 @@
 import { AppBar, Box, Toolbar } from '@mui/material';
-import {signIn, signOut, useSession} from "next-auth/react";
+import { signIn, signOut, useSession } from 'next-auth/react';
 import { ReactNode } from 'react';
 
 type LayoutProps = {

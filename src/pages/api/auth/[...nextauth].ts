@@ -13,6 +13,6 @@ export const authOptions = {
   // 適度に長いランダムな文字列を設定する必要があります。
   // JWTを暗号化するために別の秘密が明示的に定義されていない限り、
   // クッキーに署名し、JSONウェブトークンを署名および暗号化するために使用されます。
-  // secret: 'RANDOM STRINGS',
+  // secret: '',
 };
 export default NextAuth(authOptions);

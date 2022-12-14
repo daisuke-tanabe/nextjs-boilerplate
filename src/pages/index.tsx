@@ -1,14 +1,11 @@
-import { useSession, signIn, signOut } from 'next-auth/react';
 import Head from 'next/head';
 import Image from 'next/image';
+import { ReactElement } from 'react';
 
+import { MainLayout } from '../components/Layout'
 import styles from '../styles/Home.module.css';
 
 const Home = () => {
-  const { data: session,status } = useSession();
-
-  console.log(status, session);
-
   return (
     <div className={styles.container}>
       <Head>
@@ -18,19 +15,6 @@ const Home = () => {
       </Head>
 
       <main className={styles.main}>
-        {session ? (
-          <>
-            <div>{session.user?.email}</div>
-            <button type="button" onClick={() => signOut()}>
-              Sign out
-            </button>
-          </>
-        ) : (
-          <button type="button" onClick={() => signIn()}>
-            Sign in
-          </button>
-        )}
-
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
@@ -81,6 +65,10 @@ const Home = () => {
       </footer>
     </div>
   );
+};
+
+Home.getLayout = function getLayout(page: ReactElement) {
+  return <MainLayout>{page}</MainLayout>;
 };
 
 export default Home;

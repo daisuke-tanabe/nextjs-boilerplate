@@ -13,7 +13,7 @@ export const MainLayout = ({ children }: LayoutProps) => {
 
   return (
     <Box>
-      <AppBar>
+      <AppBar position="static">
         <Toolbar>
           {session ? (
             <>

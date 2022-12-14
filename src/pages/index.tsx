@@ -15,7 +15,13 @@ const Home = () => {
 
       <h1>Next.js Boilerplate</h1>
 
-      <NextLink href="/content">to Content Page</NextLink>
+      <div>
+        <NextLink href="/content">to Content Page</NextLink>
+      </div>
+
+      <div>
+        <NextLink href="/dashboard">to Dashboard Page</NextLink>
+      </div>
     </>
   );
 };

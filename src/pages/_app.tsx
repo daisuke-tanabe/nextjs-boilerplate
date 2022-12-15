@@ -1,3 +1,4 @@
+import { ApolloProvider } from '@apollo/client';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
@@ -6,6 +7,7 @@ import { SessionProvider } from 'next-auth/react';
 import type { AppProps } from 'next/app';
 import type { ReactElement, ReactNode } from 'react';
 
+import apolloClient from '../lib/apolloClient';
 import createEmotionCache from '../lib/createEmotionCache';
 import theme from '../lib/theme';
 
@@ -24,19 +26,22 @@ type MyAppProps = AppProps & {
 const MyApp = ({
   Component,
   emotionCache = clientSideEmotionCache,
-  pageProps: { session, ...pageProps },
+  pageProps,
 }: MyAppProps) => {
+  // console.log('test/pageProps.session: ', pageProps.session);
   const getLayout = Component.getLayout ?? ((page) => page);
 
   return (
-    <SessionProvider session={session}>
-      <CacheProvider value={emotionCache}>
-        <ThemeProvider theme={theme}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline />
-          {getLayout(<Component {...pageProps} />)}
-        </ThemeProvider>
-      </CacheProvider>
+    <SessionProvider session={pageProps.session}>
+      <ApolloProvider client={apolloClient}>
+        <CacheProvider value={emotionCache}>
+          <ThemeProvider theme={theme}>
+            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+            <CssBaseline />
+            {getLayout(<Component {...pageProps} />)}
+          </ThemeProvider>
+        </CacheProvider>
+      </ApolloProvider>
     </SessionProvider>
   );
 };

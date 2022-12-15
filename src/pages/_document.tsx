@@ -9,10 +9,10 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en" className={roboto.className}>
         <Head>
-          {/* PWA primary color */}
+          <meta name="robots" content="noindex" />
           <meta name="theme-color" content={theme.palette.primary.main} />
-          <link rel="shortcut icon" href="/public/favicon.ico" />
           <meta name="emotion-insertion-point" content="" />
+          <link rel="shortcut icon" href="/favicon.ico" />
           {(this.props as any).emotionStyleTags}
         </Head>
         <body>

@@ -7,9 +7,9 @@ type LayoutProps = {
 };
 
 export const MainLayout = ({ children }: LayoutProps) => {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
-  console.log(status, session);
+  // console.log('test/session: ', session);
 
   return (
     <Box>

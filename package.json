@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "codegen": "graphql-codegen --config codegen.ts",
     "dev": "next dev",
     "format": "prettier --write 'src/**/*.{ts,tsx}'",
     "build": "next build",

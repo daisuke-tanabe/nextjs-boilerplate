@@ -1,10 +1,17 @@
+import { useSession } from "next-auth/react";
 import NextHead from 'next/head';
 import NextLink from 'next/link';
 import { ReactElement } from 'react';
 
 import { MainLayout } from '../components/Layout';
+import { useBooksQuery } from "../hooks/useBooksQuery";
 
 const Home = () => {
+  const { data: session } = useSession();
+  const { data } = useBooksQuery({
+    variables: { session }
+  });
+
   return (
     <>
       <NextHead>
@@ -14,6 +21,12 @@ const Home = () => {
       </NextHead>
 
       <h1>Next.js Boilerplate</h1>
+
+      {
+        data && data?.books.map(({ id, title, author }) => {
+          return <div key={id}>{title}, {author}</div>
+        })
+      }
 
       <div>
         <NextLink href="/content">to Content Page</NextLink>

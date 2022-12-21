@@ -6,7 +6,7 @@ import { ReactElement } from 'react';
 import { MainLayout } from '../../components/Layout';
 
 const Content = () => {
-  const { data, loading, error } = useQuery<{ user: { status: string }}>(
+  const { data, loading } = useQuery<{ user: { status: string }}>(
     gql`
       query User {
         user {

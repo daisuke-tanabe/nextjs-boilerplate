@@ -1,5 +1,4 @@
-import { useQuery, QueryHookOptions } from '@apollo/client';
-import { gql } from 'graphql-tag';
+import { useQuery, QueryHookOptions, gql } from '@apollo/client';
 
 export const useBooksQuery = (options?: QueryHookOptions) =>
   useQuery<{

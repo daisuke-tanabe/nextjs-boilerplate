@@ -1,4 +1,5 @@
 import NextAuth, { type AuthOptions } from 'next-auth';
+import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from 'next-auth/providers/google';
 
 export const authOptions: AuthOptions = {
@@ -7,6 +8,10 @@ export const authOptions: AuthOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
+    GithubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID as string,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
+    })
   ],
 
   callbacks: {
@@ -32,11 +37,10 @@ export const authOptions: AuthOptions = {
     }
   },
 
-
   // 環境変数「NEXTAUTH_SECRET」で設定している場合は不要です。
   // 適度に長いランダムな文字列を設定する必要があります。
   // JWTを暗号化するために別の秘密が明示的に定義されていない限り、
   // クッキーに署名し、JSONウェブトークンを署名および暗号化するために使用されます。
-  secret: '2b149d2e0a0d6df043efa36257a755542c403967dac905f95aae52124961f25a',
+  // secret: 'RANDOM_STRINGS',
 };
 export default NextAuth(authOptions);

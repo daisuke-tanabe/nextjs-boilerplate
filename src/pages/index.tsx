@@ -1,16 +1,17 @@
-import { useSession } from "next-auth/react";
 import NextHead from 'next/head';
 import NextLink from 'next/link';
 import { ReactElement } from 'react';
 
 import { MainLayout } from '../components/Layout';
-import { useBooksQuery } from "../hooks/useBooksQuery";
+import { booksQuery, type Books } from "../hooks/useBooksQuery";
+import { useUserQuery } from "../hooks/useUserQuery";
+import apolloClient from '../lib/apolloClient';
 
-const Home = () => {
-  const { data: session } = useSession();
-  const { data } = useBooksQuery({
-    variables: { session }
-  });
+type HomeProps = {
+  booksData: Books
+}
+const Home = ({ booksData }: HomeProps) => {
+  const { data: userData } = useUserQuery();
 
   return (
     <>
@@ -22,10 +23,17 @@ const Home = () => {
 
       <h1>Next.js Boilerplate</h1>
 
+      <h2>BEから適当な情報を取得(プリレンダリング)</h2>
+      <p>以下はSSRで表示している情報</p>
       {
-        data && data?.books.map(({ id, title, author }) => {
+        booksData && booksData?.books.map(({ id, title, author }) => {
           return <div key={id}>{title}, {author}</div>
         })
+      }
+
+      <h2>BEにATを渡し、それを復号した一部ユーザー情報を返却</h2>
+      {
+        userData && <div>{userData.user.name}<br />{userData.user.email}</div>
       }
 
       <div>
@@ -38,6 +46,18 @@ const Home = () => {
     </>
   );
 };
+
+export const getServerSideProps = async() => {
+  const { data: booksData } = await apolloClient.query({
+    query: booksQuery
+  })
+
+  return {
+    props: {
+      booksData
+    }
+  }
+}
 
 Home.getLayout = (page: ReactElement) => <MainLayout>{page}</MainLayout>;
 

@@ -11,7 +11,7 @@ type HomeProps = {
   booksData: Books
 }
 const Home = ({ booksData }: HomeProps) => {
-  const { data: userData } = useUserQuery();
+  const { data: userData, loading } = useUserQuery();
 
   return (
     <>
@@ -35,7 +35,7 @@ const Home = ({ booksData }: HomeProps) => {
       {
         // TODO 全表示するだけなので一旦全部無視
         // @ts-ignore
-        userData && Object.keys(userData.user).map(key => <div key={key}>{userData.user[key]}</div>)
+        !loading && userData && Object.keys(userData.user).map(key => <div key={key}>{userData.user[key]}</div>)
       }
 
       <div>

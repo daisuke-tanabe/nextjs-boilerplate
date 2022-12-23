@@ -3,6 +3,8 @@ import { ApolloServer } from '@apollo/server';
 import { startServerAndCreateNextHandler } from '@as-integrations/next';
 import { parse as cookieParse } from 'cookie';
 
+console.log(process.env.NEXT_AUTH_SESSION_TOKEN_NAME)
+
 const gateway = new ApolloGateway({
   supergraphSdl: new IntrospectAndCompose({
     subgraphs: [
@@ -36,10 +38,10 @@ export default startServerAndCreateNextHandler(server, {
 
     if (cookie) {
       const cookies = cookieParse(cookie);
-      // TODO 本番とローカルでクッキー名が違うから考慮しないといけない
-      if (cookies['__Secure-next-auth.session-token']) {
+      const sessionToken = cookies[process.env.NEXT_AUTH_SESSION_TOKEN_NAME as string];
+      if (sessionToken) {
         return {
-          authorization: `Bearer ${cookies['__Secure-next-auth.session-token']}`
+          authorization: `Bearer ${sessionToken}`
         }
       }
     }

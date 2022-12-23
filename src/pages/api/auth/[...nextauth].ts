@@ -19,19 +19,16 @@ export const authOptions: AuthOptions = {
       if (account) {
         return {
           ...token,
-          accessToken: account.access_token
         }
       }
       return token;
     },
     // TODO まだよく見てないがAccountあたりが問題になっていそう
-    // @ts-ignore
-    async session({ session, token }) {
+    async session({ session }) {
       return {
         ...session,
         user: {
           ...session.user,
-          accessToken: token.accessToken
         }
       }
     }

@@ -4,6 +4,11 @@ type User = {
   user: {
     name: string;
     email: string;
+    picture: string;
+    sub: string;
+    iat: number
+    esp: number
+    jti: string
   }
 }
 
@@ -12,6 +17,11 @@ const query = gql`
     user {
       name
       email
+      picture
+      sub
+      iat
+      exp
+      jti
     }
   }
 `;

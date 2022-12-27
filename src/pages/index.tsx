@@ -33,9 +33,7 @@ const Home = ({ booksData }: HomeProps) => {
 
       <h2>BEにATを渡し、それを復号した一部ユーザー情報を返却</h2>
       {
-        // TODO 全表示するだけなので一旦全部無視
-        // @ts-ignore
-        !loading && userData && Object.keys(userData.user).map(key => <div key={key}>{userData.user[key]}</div>)
+        !loading && userData?.user && Object.entries(userData.user).map(([key, value]) => <div key={key}>{key}:&nbsp;{value}</div>)
       }
 
       <div>

@@ -28,7 +28,7 @@ const Content = () => {
 
       <h2>Apollo Client Test</h2>
       <div>データ取得とBearerのチェック</div>
-      <div>user?: { loading ? 'null' : data?.user.status }</div>
+      <div>user: 未実装</div>
 
       <NextLink href="/">to Home Page</NextLink>
     </>

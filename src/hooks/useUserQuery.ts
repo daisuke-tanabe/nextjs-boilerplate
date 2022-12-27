@@ -1,15 +1,17 @@
 import { useQuery, QueryHookOptions, gql } from '@apollo/client';
 
+type UserProperty = {
+  name: string;
+  email: string;
+  picture: string;
+  sub: string;
+  iat: number
+  esp: number
+  jti: string
+}
+
 type User = {
-  user: {
-    name: string;
-    email: string;
-    picture: string;
-    sub: string;
-    iat: number
-    esp: number
-    jti: string
-  }
+  user: UserProperty | null;
 }
 
 const query = gql`

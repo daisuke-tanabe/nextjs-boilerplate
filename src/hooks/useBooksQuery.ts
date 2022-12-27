@@ -5,8 +5,8 @@ export type Books = {
     id: string;
     title: string;
     author: string;
-  }[]
-}
+  }[];
+};
 export const booksQuery = gql`
   query Query {
     books {
@@ -17,5 +17,4 @@ export const booksQuery = gql`
   }
 `;
 
-export const useBooksQuery = (options?: QueryHookOptions) =>
-  useQuery<Books>(booksQuery, options,);
+export const useBooksQuery = (options?: QueryHookOptions) => useQuery<Books>(booksQuery, options);

@@ -1,5 +1,5 @@
 import NextAuth, { type AuthOptions } from 'next-auth';
-import GithubProvider from "next-auth/providers/github";
+import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 
 export const authOptions: AuthOptions = {
@@ -11,7 +11,7 @@ export const authOptions: AuthOptions = {
     GithubProvider({
       clientId: process.env.GITHUB_CLIENT_ID as string,
       clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
-    })
+    }),
   ],
 
   callbacks: {
@@ -19,7 +19,7 @@ export const authOptions: AuthOptions = {
       if (account) {
         return {
           ...token,
-        }
+        };
       }
       return token;
     },
@@ -29,9 +29,9 @@ export const authOptions: AuthOptions = {
         ...session,
         user: {
           ...session.user,
-        }
-      }
-    }
+        },
+      };
+    },
   },
 
   // 環境変数「NEXTAUTH_SECRET」で設定している場合は不要です。

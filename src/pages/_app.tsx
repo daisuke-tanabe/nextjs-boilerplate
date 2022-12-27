@@ -23,11 +23,7 @@ type MyAppProps = AppProps & {
   emotionCache?: EmotionCache;
 };
 
-const MyApp = ({
-  Component,
-  emotionCache = clientSideEmotionCache,
-  pageProps,
-}: MyAppProps) => {
+const MyApp = ({ Component, emotionCache = clientSideEmotionCache, pageProps }: MyAppProps) => {
   // console.log('test/pageProps.session: ', pageProps.session);
   const getLayout = Component.getLayout ?? ((page) => page);
 

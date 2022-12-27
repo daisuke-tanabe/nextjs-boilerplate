@@ -3,13 +3,13 @@ import NextLink from 'next/link';
 import { ReactElement } from 'react';
 
 import { MainLayout } from '../components/Layout';
-import { booksQuery, type Books } from "../hooks/useBooksQuery";
-import { useUserQuery } from "../hooks/useUserQuery";
+import { booksQuery, type Books } from '../hooks/useBooksQuery';
+import { useUserQuery } from '../hooks/useUserQuery';
 import apolloClient from '../lib/apolloClient';
 
 type HomeProps = {
-  booksData: Books
-}
+  booksData: Books;
+};
 const Home = ({ booksData }: HomeProps) => {
   const { data: userData, loading } = useUserQuery();
 
@@ -25,16 +25,23 @@ const Home = ({ booksData }: HomeProps) => {
 
       <h2>BEから適当な情報を取得(プリレンダリング)</h2>
       <p>以下はSSRで表示している情報</p>
-      {
-        booksData && booksData?.books.map(({ id, title, author }) => {
-          return <div key={id}>{title}, {author}</div>
-        })
-      }
+      {booksData &&
+        booksData?.books.map(({ id, title, author }) => {
+          return (
+            <div key={id}>
+              {title}, {author}
+            </div>
+          );
+        })}
 
       <h2>BEにATを渡し、それを復号した一部ユーザー情報を返却</h2>
-      {
-        !loading && userData?.user && Object.entries(userData.user).map(([key, value]) => <div key={key}>{key}:&nbsp;{value}</div>)
-      }
+      {!loading &&
+        userData?.user &&
+        Object.entries(userData.user).map(([key, value]) => (
+          <div key={key}>
+            {key}:&nbsp;{value}
+          </div>
+        ))}
 
       <div>
         <NextLink href="/content">to Content Page</NextLink>
@@ -47,17 +54,17 @@ const Home = ({ booksData }: HomeProps) => {
   );
 };
 
-export const getServerSideProps = async() => {
+export const getServerSideProps = async () => {
   const { data: booksData } = await apolloClient.query({
-    query: booksQuery
-  })
+    query: booksQuery,
+  });
 
   return {
     props: {
-      booksData
-    }
-  }
-}
+      booksData,
+    },
+  };
+};
 
 Home.getLayout = (page: ReactElement) => <MainLayout>{page}</MainLayout>;
 

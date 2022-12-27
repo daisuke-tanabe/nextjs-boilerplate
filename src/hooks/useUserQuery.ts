@@ -5,14 +5,14 @@ type UserProperty = {
   email: string;
   picture: string;
   sub: string;
-  iat: number
-  esp: number
-  jti: string
-}
+  iat: number;
+  esp: number;
+  jti: string;
+};
 
 type User = {
   user: UserProperty | null;
-}
+};
 
 const query = gql`
   query User {

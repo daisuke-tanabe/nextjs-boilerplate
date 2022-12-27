@@ -1,4 +1,3 @@
-import { useQuery, gql } from '@apollo/client';
 import NextHead from 'next/head';
 import NextLink from 'next/link';
 import { ReactElement } from 'react';
@@ -6,16 +5,6 @@ import { ReactElement } from 'react';
 import { MainLayout } from '../../components/Layout';
 
 const Content = () => {
-  const { data, loading } = useQuery<{ user: { status: string }}>(
-    gql`
-      query User {
-        user {
-          status
-        }
-      }
-    `
-  );
-
   return (
     <>
       <NextHead>

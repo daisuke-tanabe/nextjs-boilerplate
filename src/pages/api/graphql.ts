@@ -3,9 +3,9 @@ import { ApolloServer } from '@apollo/server';
 import { startServerAndCreateNextHandler } from '@as-integrations/next';
 import { parse as cookieParse } from 'cookie';
 
-console.log(process.env.NEXT_AUTH_SESSION_TOKEN_NAME);
-
 const gateway = new ApolloGateway({
+  // IntrospectAndComposeは本番環境での利用は推奨されていない
+  // https://www.apollographql.com/docs/apollo-server/using-federation/apollo-gateway-setup/#limitations-of-introspectandcompose
   supergraphSdl: new IntrospectAndCompose({
     subgraphs: [
       // nameは任意の文字列値
